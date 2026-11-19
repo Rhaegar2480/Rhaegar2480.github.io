@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rhaegar2480 — Android 應用程式開發者</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --accent: #ff7a00;
+      --accent-hover: #e56d00;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+      margin: 0;
+      padding: 32px 16px;
+    }
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 26px;
+    }
+    header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .contact {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .contact a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .contact a:hover {
+      text-decoration: underline;
+    }
+    h2.section-title {
+      font-size: 18px;
+      margin: 28px 0 14px;
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+    }
+    .app-card h3 {
+      margin: 0 0 6px;
+      font-size: 19px;
+    }
+    .app-card .pkg {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    .app-card p {
+      margin: 0 0 16px;
+      font-size: 15px;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .btn-play {
+      display: inline-block;
+      background-color: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .btn-play:hover {
+      background-color: var(--accent-hover);
+    }
+    .btn-secondary {
+      display: inline-block;
+      background-color: #f1f5f9;
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .btn-secondary:hover {
+      background-color: #e2e8f0;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 32px;
+    }
+    footer a {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="card">
+      <h1>Rhaegar2480 — Android 應用程式開發</h1>
+      <p>獨立 Android 應用程式開發者，專注於打造實用、簡潔的日常生活工具與地圖查詢應用。</p>
+      <div class="contact">
+        聯絡信箱：<a href="mailto:androidapkent@gmail.com">androidapkent@gmail.com</a>
+      </div>
+    </header>
+
+    <h2 class="section-title">已發布應用程式</h2>
+
+    <section class="card app-card">
+      <h3>商品地圖 - 超商活動商品查詢</h3>
+      <div class="pkg">com.finditon.gm</div>
+      <p>協助使用者快速搜尋台灣地區超商活動商品，並依目前定位在地圖上查詢鄰近販售門市、距離與路線導航。</p>
+      <div class="links">
+        <a class="btn-play" href="https://play.google.com/store/apps/details?id=com.finditon.gm" target="_blank" rel="noopener noreferrer">前往 Google Play 下載</a>
+        <a class="btn-secondary" href="finditongm/privacy-policy.html">隱私權政策</a>
+        <a class="btn-secondary" href="finditongm/terms-of-service.html">服務條款</a>
+      </div>
+    </section>
+
+    <section class="card app-card">
+      <h3>FindMyCar</h3>
+      <p>協助使用者記錄停車位置並快速導航找回愛車的實用定位工具。</p>
+      <div class="links">
+        <!-- 若 FindMyCar 已上架 Google Play，請取消註解下方連結並填入正確的套件名稱 -->
+        <!-- <a class="btn-play" href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_ID" target="_blank" rel="noopener noreferrer">前往 Google Play 下載</a> -->
+        <a class="btn-secondary" href="findmycar/privacy-policy.html">Privacy Policy</a>
+        <a class="btn-secondary" href="findmycar/terms-of-service.html">Terms of Service</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Rhaegar2480. All rights reserved. · <a href="app-ads.txt">app-ads.txt</a></p>
+    </footer>
+  </div>
+</body>
+</html>
