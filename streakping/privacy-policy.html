@@ -14,7 +14,7 @@
             --border: #E5E7EB;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", Helvetica, Arial, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.7;
@@ -30,10 +30,13 @@
             padding: 32px 28px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
         }
-        h1 {
-            margin-top: 0;
-            font-size: 1.85rem;
-            color: var(--text);
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
         }
         .badge {
             display: inline-block;
@@ -43,7 +46,32 @@
             font-size: 0.85rem;
             padding: 4px 10px;
             border-radius: 999px;
-            margin-bottom: 12px;
+        }
+        .lang-switch {
+            display: inline-flex;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            overflow: hidden;
+            background: var(--bg);
+        }
+        .lang-btn {
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+        .lang-btn.active {
+            background: var(--primary);
+            color: #FFFFFF;
+        }
+        h1 {
+            margin-top: 4px;
+            font-size: 1.85rem;
+            color: var(--text);
         }
         .updated {
             color: var(--muted);
@@ -69,6 +97,12 @@
         a:hover {
             text-decoration: underline;
         }
+        [data-lang-section] {
+            display: none;
+        }
+        [data-lang-section].active {
+            display: block;
+        }
         footer {
             margin-top: 36px;
             padding-top: 16px;
@@ -80,82 +114,172 @@
 </head>
 <body>
 <div class="container">
-    <span class="badge">StreakPing</span>
-    <h1>Privacy Policy</h1>
-    <p class="updated">Effective Date: November 25, 2026</p>
+    <div class="top-bar">
+        <span class="badge">StreakPing</span>
+        <div class="lang-switch" role="group" aria-label="Language Switcher">
+            <button type="button" class="lang-btn active" id="btn-en" onclick="setLang('en')">English</button>
+            <button type="button" class="lang-btn" id="btn-zh" onclick="setLang('zh')">繁體中文</button>
+        </div>
+    </div>
 
-    <p>
-        Thank you for using <strong>StreakPing</strong> (package name: <code>com.androidapkent.streakping</code>).
-        Your privacy is important to us. This Privacy Policy explains how StreakPing handles information on your device
-        and what third-party services are used.
-    </p>
+    <!-- English Version (Default) -->
+    <div data-lang-section="en" class="active">
+        <h1>Privacy Policy</h1>
+        <p class="updated">Effective Date: November 25, 2026</p>
 
-    <h2>1. Local-First Data Storage</h2>
-    <p>
-        StreakPing does <strong>not</strong> require account registration and does <strong>not</strong> operate any backend
-        servers to store your personal data. All app configurations, tracked app selections, daily reset hours,
-        reminder schedules, and check-in history are stored <strong>locally on your device</strong>.
-    </p>
+        <p>
+            Thank you for using <strong>StreakPing</strong> (package name: <code>com.androidapkent.streakping</code>).
+            Your privacy is important to us. This Privacy Policy explains how StreakPing handles information on your device
+            and what third-party services are used.
+        </p>
 
-    <h2>2. Permissions &amp; On-Device Processing</h2>
-    <ul>
-        <li>
-            <strong>Launchable Apps Query (<code>MAIN / LAUNCHER</code>):</strong> Used strictly on your device to display
-            a list of launchable apps so you can choose which apps to track and open them in one tap. Your list of installed
-            apps is never uploaded or shared.
-        </li>
-        <li>
-            <strong>Notifications &amp; Exact Alarms (<code>POST_NOTIFICATIONS</code>, <code>SCHEDULE_EXACT_ALARM</code>):</strong>
-            Used solely to deliver your scheduled daily check-in reminders.
-        </li>
-        <li>
-            <strong>Usage Access (<code>PACKAGE_USAGE_STATS</code> — Optional):</strong> Only used if you explicitly grant
-            Usage Access in Android Settings and select the <em>Auto (UsageStats)</em> check-in mode for a tracked app.
-            StreakPing checks locally on-device whether that specific tracked app was used in the foreground for the configured
-            duration. Usage statistics are never transmitted off your device.
-        </li>
-    </ul>
+        <h2>1. Local-First Data Storage</h2>
+        <p>
+            StreakPing does <strong>not</strong> require account registration and does <strong>not</strong> operate any backend
+            servers to store your personal data. All app configurations, tracked app selections, daily reset hours,
+            reminder schedules, and check-in history are stored <strong>locally on your device</strong>.
+        </p>
 
-    <h2>3. Third-Party Advertising (Google AdMob)</h2>
-    <p>
-        StreakPing is provided free of charge and displays banner advertisements powered by <strong>Google AdMob</strong>.
-        Google AdMob may collect and process certain device information (such as your Android Advertising ID, IP address,
-        device model, and ad interaction metrics) to serve and measure ads.
-    </p>
-    <p>
-        For more details on how Google handles data, please review the
-        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>
-        and
-        <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener noreferrer">How Google uses information from sites or apps that use our services</a>.
-    </p>
+        <h2>2. Permissions &amp; On-Device Processing</h2>
+        <ul>
+            <li>
+                <strong>Launchable Apps Query (<code>MAIN / LAUNCHER</code>):</strong> Used strictly on your device to display
+                a list of launchable apps so you can choose which apps to track and open them in one tap. Your list of installed
+                apps is never uploaded or shared.
+            </li>
+            <li>
+                <strong>Notifications &amp; Exact Alarms (<code>POST_NOTIFICATIONS</code>, <code>SCHEDULE_EXACT_ALARM</code>):</strong>
+                Used solely to deliver your scheduled daily check-in reminders.
+            </li>
+            <li>
+                <strong>Usage Access (<code>PACKAGE_USAGE_STATS</code> — Optional):</strong> Only used if you explicitly grant
+                Usage Access in Android Settings and select the <em>Auto (UsageStats)</em> check-in mode for a tracked app.
+                StreakPing checks locally on-device whether that specific tracked app was used in the foreground for the configured
+                duration. Usage statistics are never transmitted off your device.
+            </li>
+        </ul>
 
-    <h2>4. Data Backup &amp; Deletion</h2>
-    <p>
-        You can export or import your local configuration using the JSON backup feature in Settings. You can delete any
-        tracked app inside the app at any time, or uninstall StreakPing to permanently remove all locally stored data.
-    </p>
+        <h2>3. Third-Party Advertising (Google AdMob)</h2>
+        <p>
+            StreakPing is provided free of charge and displays banner advertisements powered by <strong>Google AdMob</strong>.
+            Google AdMob may collect and process certain device information (such as your Android Advertising ID, IP address,
+            device model, and ad interaction metrics) to serve and measure ads.
+        </p>
+        <p>
+            For more details on how Google handles data, please review the
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>
+            and
+            <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener noreferrer">How Google uses information from sites or apps that use our services</a>.
+        </p>
 
-    <h2>5. Children's Privacy</h2>
-    <p>
-        StreakPing is not directed to children under the age of 13, and we do not knowingly collect personal information
-        from children.
-    </p>
+        <h2>4. Data Backup &amp; Deletion</h2>
+        <p>
+            You can export or import your local configuration using the JSON backup feature in Settings. You can delete any
+            tracked app inside the app at any time, or uninstall StreakPing to permanently remove all locally stored data.
+        </p>
 
-    <h2>6. Changes to This Policy</h2>
-    <p>
-        We may update this Privacy Policy from time to time. Any updates will be posted on this page with an updated
-        effective date.
-    </p>
+        <h2>5. Children's Privacy</h2>
+        <p>
+            StreakPing is not directed to children under the age of 13, and we do not knowingly collect personal information
+            from children.
+        </p>
 
-    <h2>7. Contact Us</h2>
-    <p>
-        If you have any questions about this Privacy Policy, please contact the developer at:
-        <a href="mailto:androdiapkent@gmail.com">androdiapkent@gmail.com</a>
-    </p>
+        <h2>6. Changes to This Policy</h2>
+        <p>
+            We may update this Privacy Policy from time to time. Any updates will be posted on this page with an updated
+            effective date.
+        </p>
+
+        <h2>7. Contact Us</h2>
+        <p>
+            If you have any questions about this Privacy Policy, please contact the developer at:
+            <a href="mailto:androdiapkent@gmail.com">androdiapkent@gmail.com</a>
+        </p>
+    </div>
+
+    <!-- Traditional Chinese Version -->
+    <div data-lang-section="zh">
+        <h1>隱私權政策（Privacy Policy）</h1>
+        <p class="updated">生效日期：2026 年 11 月 25 日</p>
+
+        <p>
+            感謝您使用 <strong>StreakPing</strong>（套件名稱：<code>com.androidapkent.streakping</code>）。
+            我們非常重視您的隱私，本隱私權政策說明本應用程式如何在您的裝置上處理資訊，以及所使用之第三方服務。
+        </p>
+
+        <h2>1. 本地優先儲存（Local-First）</h2>
+        <p>
+            StreakPing <strong>不需要</strong>註冊帳號，亦<strong>不設有</strong>任何後端伺服器來儲存您的個人資料。
+            所有的追蹤 App 清單、每日重置時間、提醒排程與簽到紀錄皆僅儲存於<strong>您的裝置本機</strong>。
+        </p>
+
+        <h2>2. 權限使用與本機處理說明</h2>
+        <ul>
+            <li>
+                <strong>可啟動應用程式查詢（<code>MAIN / LAUNCHER</code>）：</strong>僅於本機讀取可啟動的 App 清單，
+                讓您選擇要追蹤的目標並一鍵開啟。我們絕不會上傳或分享您手機內已安裝的 App 清單。
+            </li>
+            <li>
+                <strong>通知與精準鬧鐘（<code>POST_NOTIFICATIONS</code>、<code>SCHEDULE_EXACT_ALARM</code>）：</strong>
+                僅用於準時發送您所設定的每日簽到提醒。
+            </li>
+            <li>
+                <strong>使用情況存取權（<code>PACKAGE_USAGE_STATS</code> — 選用）：</strong>僅在您主動於 Android 系統設定授權，
+                且對特定 App 選擇「自動偵測 (UsageStats)」模式時才會使用。本 App 僅於本機確認該目標 App 今日前景停留時間是否達標，
+                相關使用紀錄絕不會傳送至裝置外部。
+            </li>
+        </ul>
+
+        <h2>3. 第三方廣告服務（Google AdMob）</h2>
+        <p>
+            StreakPing 採免費提供並透過 <strong>Google AdMob</strong> 顯示橫幅廣告。Google AdMob 可能會依其規範蒐集並處理特定裝置資訊
+            （例如 Android 廣告識別碼、IP 位址、裝置型號與廣告互動數據），以提供與衡量廣告成效。
+        </p>
+        <p>
+            如需進一步了解 Google 如何處理資料，請參閱
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google 隱私權政策</a>
+            與
+            <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener noreferrer">Google 如何使用來自使用我們服務的網站或應用程式的資訊</a>。
+        </p>
+
+        <h2>4. 資料備份與刪除</h2>
+        <p>
+            您可隨時透過設定頁的 JSON 備份功能匯出或匯入本機設定，亦可在 App 內刪除任一追蹤項目，或直接解除安裝 StreakPing
+            以永久移除所有本機資料。
+        </p>
+
+        <h2>5. 兒童隱私</h2>
+        <p>
+            StreakPing 並非針對 13 歲以下兒童設計，我們不會刻意蒐集兒童之個人資訊。
+        </p>
+
+        <h2>6. 政策修訂</h2>
+        <p>
+            我們可能會不定期更新本隱私權政策，更新後的內容與生效日期將直接公告於本頁面。
+        </p>
+
+        <h2>7. 聯絡我們</h2>
+        <p>
+            若對本隱私權政策有任何疑問，歡迎透過電子郵件與開發者聯繫：
+            <a href="mailto:androdiapkent@gmail.com">androdiapkent@gmail.com</a>
+        </p>
+    </div>
 
     <footer>
         &copy; 2026 StreakPing. All rights reserved.
     </footer>
 </div>
+
+<script>
+    function setLang(lang) {
+        document.querySelectorAll('[data-lang-section]').forEach(function (el) {
+            el.classList.toggle('active', el.getAttribute('data-lang-section') === lang);
+        });
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+        document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+        document.title = lang === 'zh' ? '隱私權政策 - StreakPing' : 'Privacy Policy - StreakPing';
+    }
+</script>
 </body>
 </html>

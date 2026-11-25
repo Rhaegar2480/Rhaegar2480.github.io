@@ -14,7 +14,7 @@
             --border: #E5E7EB;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", Helvetica, Arial, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.7;
@@ -30,10 +30,13 @@
             padding: 32px 28px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
         }
-        h1 {
-            margin-top: 0;
-            font-size: 1.85rem;
-            color: var(--text);
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
         }
         .badge {
             display: inline-block;
@@ -43,7 +46,32 @@
             font-size: 0.85rem;
             padding: 4px 10px;
             border-radius: 999px;
-            margin-bottom: 12px;
+        }
+        .lang-switch {
+            display: inline-flex;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            overflow: hidden;
+            background: var(--bg);
+        }
+        .lang-btn {
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+        .lang-btn.active {
+            background: var(--primary);
+            color: #FFFFFF;
+        }
+        h1 {
+            margin-top: 4px;
+            font-size: 1.85rem;
+            color: var(--text);
         }
         .updated {
             color: var(--muted);
@@ -63,6 +91,12 @@
         a:hover {
             text-decoration: underline;
         }
+        [data-lang-section] {
+            display: none;
+        }
+        [data-lang-section].active {
+            display: block;
+        }
         footer {
             margin-top: 36px;
             padding-top: 16px;
@@ -74,71 +108,150 @@
 </head>
 <body>
 <div class="container">
-    <span class="badge">StreakPing</span>
-    <h1>Terms of Service</h1>
-    <p class="updated">Effective Date: November 25, 2026</p>
+    <div class="top-bar">
+        <span class="badge">StreakPing</span>
+        <div class="lang-switch" role="group" aria-label="Language Switcher">
+            <button type="button" class="lang-btn active" id="btn-en" onclick="setLang('en')">English</button>
+            <button type="button" class="lang-btn" id="btn-zh" onclick="setLang('zh')">繁體中文</button>
+        </div>
+    </div>
 
-    <p>
-        By downloading or using <strong>StreakPing</strong> (package name: <code>com.androidapkent.streakping</code>),
-        you agree to the following Terms of Service.
-    </p>
+    <!-- English Version (Default) -->
+    <div data-lang-section="en" class="active">
+        <h1>Terms of Service</h1>
+        <p class="updated">Effective Date: November 25, 2026</p>
 
-    <h2>1. Use of the App</h2>
-    <p>
-        StreakPing is a personal productivity and daily check-in reminder utility provided free of charge with
-        ad support. You may use the app for lawful, personal, non-commercial purposes in accordance with these terms.
-    </p>
+        <p>
+            By downloading or using <strong>StreakPing</strong> (package name: <code>com.androidapkent.streakping</code>),
+            you agree to the following Terms of Service.
+        </p>
 
-    <h2>2. Reminders &amp; Device Limitations</h2>
-    <p>
-        StreakPing relies on Android system scheduling APIs (such as <code>AlarmManager</code> and <code>WorkManager</code>).
-        Delivery timing of notifications may be affected by device battery optimization, Doze mode, or OS-level
-        restrictions. StreakPing should not be relied upon for time-critical, medical, or safety-critical alerts.
-    </p>
+        <h2>1. Use of the App</h2>
+        <p>
+            StreakPing is a personal productivity and daily check-in reminder utility provided free of charge with
+            ad support. You may use the app for lawful, personal, non-commercial purposes in accordance with these terms.
+        </p>
 
-    <h2>3. Third-Party Applications</h2>
-    <p>
-        StreakPing allows you to launch third-party applications installed on your device. All third-party apps,
-        trademarks, icons, and rewards remain the property of their respective owners. StreakPing is not affiliated with,
-        endorsed by, or responsible for the content or availability of any third-party application.
-    </p>
+        <h2>2. Reminders &amp; Device Limitations</h2>
+        <p>
+            StreakPing relies on Android system scheduling APIs (such as <code>AlarmManager</code> and <code>WorkManager</code>).
+            Delivery timing of notifications may be affected by device battery optimization, Doze mode, or OS-level
+            restrictions. StreakPing should not be relied upon for time-critical, medical, or safety-critical alerts.
+        </p>
 
-    <h2>4. Advertising</h2>
-    <p>
-        The app displays advertisements provided by Google AdMob. By using StreakPing, you acknowledge that ads may be
-        shown within the app interface. Please refer to our
-        <a href="./privacy-policy.html">Privacy Policy</a> for details on ad-related data handling.
-    </p>
+        <h2>3. Third-Party Applications</h2>
+        <p>
+            StreakPing allows you to launch third-party applications installed on your device. All third-party apps,
+            trademarks, icons, and rewards remain the property of their respective owners. StreakPing is not affiliated with,
+            endorsed by, or responsible for the content or availability of any third-party application.
+        </p>
 
-    <h2>5. Disclaimer of Warranties</h2>
-    <p>
-        StreakPing is provided on an <strong>"AS IS"</strong> and <strong>"AS AVAILABLE"</strong> basis without warranties
-        of any kind, whether express or implied. We do not guarantee uninterrupted operation, error-free performance, or
-        prevention of missed check-ins or lost streaks in third-party apps.
-    </p>
+        <h2>4. Advertising</h2>
+        <p>
+            The app displays advertisements provided by Google AdMob. By using StreakPing, you acknowledge that ads may be
+            shown within the app interface. Please refer to our
+            <a href="./privacy-policy.html">Privacy Policy</a> for details on ad-related data handling.
+        </p>
 
-    <h2>6. Limitation of Liability</h2>
-    <p>
-        To the fullest extent permitted by applicable law, the developer shall not be liable for any indirect, incidental,
-        special, or consequential damages (including missed rewards, lost in-game items, or broken streaks) arising out of
-        or related to your use of StreakPing.
-    </p>
+        <h2>5. Disclaimer of Warranties</h2>
+        <p>
+            StreakPing is provided on an <strong>"AS IS"</strong> and <strong>"AS AVAILABLE"</strong> basis without warranties
+            of any kind, whether express or implied. We do not guarantee uninterrupted operation, error-free performance, or
+            prevention of missed check-ins or lost streaks in third-party apps.
+        </p>
 
-    <h2>7. Changes to These Terms</h2>
-    <p>
-        We reserve the right to update these Terms of Service at any time. Continued use of the app after changes are posted
-        constitutes acceptance of the revised terms.
-    </p>
+        <h2>6. Limitation of Liability</h2>
+        <p>
+            To the fullest extent permitted by applicable law, the developer shall not be liable for any indirect, incidental,
+            special, or consequential damages (including missed rewards, lost in-game items, or broken streaks) arising out of
+            or related to your use of StreakPing.
+        </p>
 
-    <h2>8. Contact Us</h2>
-    <p>
-        If you have any questions about these Terms of Service, please contact:
-        <a href="mailto:androdiapkent@gmail.com">androdiapkent@gmail.com</a>
-    </p>
+        <h2>7. Changes to These Terms</h2>
+        <p>
+            We reserve the right to update these Terms of Service at any time. Continued use of the app after changes are posted
+            constitutes acceptance of the revised terms.
+        </p>
+
+        <h2>8. Contact Us</h2>
+        <p>
+            If you have any questions about these Terms of Service, please contact:
+            <a href="mailto:androdiapkent@gmail.com">androdiapkent@gmail.com</a>
+        </p>
+    </div>
+
+    <!-- Traditional Chinese Version -->
+    <div data-lang-section="zh">
+        <h1>服務條款（Terms of Service）</h1>
+        <p class="updated">生效日期：2026 年 11 月 25 日</p>
+
+        <p>
+            當您下載或使用 <strong>StreakPing</strong>（套件名稱：<code>com.androidapkent.streakping</code>），
+            即表示您同意以下服務條款。
+        </p>
+
+        <h2>1. 服務說明</h2>
+        <p>
+            StreakPing 為一款免費提供並內含廣告的個人效率與每日簽到提醒工具。您得依本條款於合法、個人及非商業用途範圍內使用本應用程式。
+        </p>
+
+        <h2>2. 提醒機制與裝置限制</h2>
+        <p>
+            StreakPing 仰賴 Android 系統排程機制（如 <code>AlarmManager</code> 與 <code>WorkManager</code>）發送通知。
+            實際提醒時間可能受到手機電池最佳化、省電模式（Doze）或作業系統限制之影響。請勿將本應用程式用於醫療、緊急安全或其他高時效性關鍵用途。
+        </p>
+
+        <h2>3. 第三方應用程式</h2>
+        <p>
+            StreakPing 協助您快速啟動裝置上已安裝的第三方應用程式。所有第三方應用程式之名稱、商標、圖示與獎勵皆屬其原權利人所有。
+            StreakPing 與該等第三方應用程式無任何隸屬、背書關係，亦不對其內容或可用性負責。
+        </p>
+
+        <h2>4. 廣告內容</h2>
+        <p>
+            本應用程式顯示由 Google AdMob 提供的廣告。使用 StreakPing 即表示您了解介面中可能呈現廣告內容；相關資料處理細節請參閱我們的
+            <a href="./privacy-policy.html">隱私權政策</a>。
+        </p>
+
+        <h2>5. 免責聲明</h2>
+        <p>
+            StreakPing 係依<strong>「現況」</strong>及<strong>「現有」</strong>基礎提供，不附帶任何明示或默示之擔保。
+            我們不保證服務絕不中斷、毫無錯誤，亦不保證能完全避免第三方應用程式內之漏簽或連勝中斷。
+        </p>
+
+        <h2>6. 責任限制</h2>
+        <p>
+            在適用法律允許的最大範圍內，開發者對於因使用或無法使用 StreakPing 所產生之任何間接、附帶、特殊或衍生性損害
+            （包含但不限於錯失獎勵、遊戲道具損失或連續簽到紀錄中斷），均不負賠償責任。
+        </p>
+
+        <h2>7. 條款修訂</h2>
+        <p>
+            我們保留隨時修訂本服務條款之權利。條款更新後若您繼續使用本應用程式，即視為您同意接受修訂後之條款。
+        </p>
+
+        <h2>8. 聯絡我們</h2>
+        <p>
+            若對本服務條款有任何疑問，歡迎來信至：
+            <a href="mailto:androdiapkent@gmail.com">androdiapkent@gmail.com</a>
+        </p>
+    </div>
 
     <footer>
         &copy; 2026 StreakPing. All rights reserved.
     </footer>
 </div>
+
+<script>
+    function setLang(lang) {
+        document.querySelectorAll('[data-lang-section]').forEach(function (el) {
+            el.classList.toggle('active', el.getAttribute('data-lang-section') === lang);
+        });
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+        document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+        document.title = lang === 'zh' ? '服務條款 - StreakPing' : 'Terms of Service - StreakPing';
+    }
+</script>
 </body>
 </html>
